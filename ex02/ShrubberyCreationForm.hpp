@@ -14,6 +14,7 @@ class ShrubberyCreationForm: public AForm{
         ShrubberyCreationForm &operator=(ShrubberyCreationForm  const & sh);
         const std::string getTarget(void) const;
         void execute(Bureaucrat const & executor) const;
+        virtual void executeForm(AForm const & form) const ;
 };
 
 #endif

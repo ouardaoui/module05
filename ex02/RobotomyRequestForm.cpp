@@ -5,7 +5,7 @@ RobotomyRequestForm::RobotomyRequestForm():_target("default")
     
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string str):AForm(str, 145,137)
+RobotomyRequestForm::RobotomyRequestForm(std::string str):AForm(str, 72,45)
 {
     
 }
@@ -36,4 +36,10 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm & 
     if(this != &c)
         this->_target = c.getTarget() ;
     return *this;
+}
+
+void RobotomyRequestForm::executeForm(AForm const & form) const 
+{
+    (void)form;
+    std::cout<<"robot ...."<<std::endl;
 }

@@ -100,3 +100,32 @@ std::ostream &operator<<(std::ostream &o, AForm &b)
         std::cout<<"form "<< b.getName()<<" didn t signed .";
     return o;
 }
+
+void AForm::execute(Bureaucrat const & executor) const
+{   
+        if(this->isSigned())
+        {
+            try
+            {
+                {
+                    if(executor.getGrade() > 150 || executor.getGrade()  > this->getGradeExec()) 
+                        throw AForm::GradeTooLowException();
+                    else if(executor.getGrade() )
+                        throw AForm::GradeTooHighException();
+                    else 
+                    {
+                        this->executeForm(*this);
+                        std::cout<<executor.getName()<<" executed "<<this->getName()<<std::endl;
+                    }
+                }
+            }
+            catch(AForm::GradeTooHighException &e)
+            {
+                    std::cout<<e.what() << std::endl;
+            }
+            catch(AForm::GradeTooLowException &e)
+            {   
+                    std::cout<<e.what() << std::endl;
+            }            
+        }
+}   

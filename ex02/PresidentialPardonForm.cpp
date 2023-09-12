@@ -5,9 +5,9 @@ PresidentialPardonForm::PresidentialPardonForm():_target("default")
     
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string str):AForm(str, 145,137)
+PresidentialPardonForm::PresidentialPardonForm(std::string str):AForm(str, 25,5)
 {
-    
+    this->_target = str;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
@@ -36,4 +36,10 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPard
     if(this != &c)
         this->_target = c.getTarget() ;
     return *this;
+}
+
+void PresidentialPardonForm::executeForm(AForm const & form) const 
+{
+    (void)form;   
+    std::cout<<this->getTarget()<<" has been pardoned by Zaphod Beeblebrox ."<<std::endl;
 }
