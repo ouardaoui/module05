@@ -1,6 +1,6 @@
 cc = c++
 flags = -Wall -Wextra -Werror -std=c++98
-src = main.cpp  AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp
+src = main.cpp  AForm.cpp Bureaucrat.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp Intern.cpp
 obj = ${src:.cpp=.o}
 name = bureaucrat
 
