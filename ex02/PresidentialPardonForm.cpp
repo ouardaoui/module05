@@ -5,7 +5,7 @@ PresidentialPardonForm::PresidentialPardonForm():_target("default")
     
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string str):AForm(str, 25,5)
+PresidentialPardonForm::PresidentialPardonForm(std::string str):AForm("Pardon form", 25,5)
 {
     this->_target = str;
 }
@@ -13,11 +13,6 @@ PresidentialPardonForm::PresidentialPardonForm(std::string str):AForm(str, 25,5)
 PresidentialPardonForm::~PresidentialPardonForm()
 {
 
-}
-
-void PresidentialPardonForm::execute(Bureaucrat const & executor) const 
-{
-    (void)executor;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm & copy)

@@ -1,23 +1,20 @@
 #include "RobotomyRequestForm.hpp"
+#include<cstdlib>
+#include<time.h>
 
 RobotomyRequestForm::RobotomyRequestForm():_target("default")
 {
     
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string str):AForm(str, 72,45)
+RobotomyRequestForm::RobotomyRequestForm(std::string str):AForm("Robotomy form", 72,45)
 {
-    
+   this->_target = str; 
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
 
-}
-
-void RobotomyRequestForm::execute(Bureaucrat const & executor) const 
-{
-    (void)executor;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm & copy)
@@ -41,5 +38,9 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm & 
 void RobotomyRequestForm::executeForm(AForm const & form) const 
 {
     (void)form;
-    std::cout<<"robot ...."<<std::endl;
+    srand(time(0));
+    if(rand() %2)
+        std::cout<<this->_target<<" has been robotomized ."<<std::endl;
+    else 
+        std::cout<<"the robotomy failed ."<<std::endl;
 }

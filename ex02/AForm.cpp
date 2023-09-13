@@ -1,11 +1,11 @@
 #include "AForm.hpp"
 
-AForm::AForm():_isSigned(false),_name("default"),_gradeSign(1),_gradeExec(1)
+AForm::AForm():_isSigned(false),_name("default"),_gradeSign(1),_gradeExec(1),_reason("didn't check yet")
 {
     return;
 }
 
-AForm::AForm(std::string name,  const int gradeSign, const int gradeExec):_isSigned(false),_name(name),_gradeSign(gradeSign),_gradeExec(gradeExec)
+AForm::AForm(std::string name,  const int gradeSign, const int gradeExec):_isSigned(false),_name(name),_gradeSign(gradeSign),_gradeExec(gradeExec),_reason("didn't check yet")
 {
     try
     {
@@ -65,18 +65,17 @@ void AForm::beSigned(Bureaucrat &b)
     else if(this->getGradeSign() >= b.getGrade() )
     {
         this->_isSigned = true;
-        std::cout<<b.getName()<<" sign "<<this->getName()<<" ."<<std::endl;
     }
     else 
-        std::cout<<b.getName()<<" couldn t sign "<<this->getName()<<" because "<<b.getName()<<"'s grad is too low ."<< std::endl;
+        throw AForm::GradeTooLowException();
     }
     catch(AForm::GradeTooHighException &e)
     {
-        std::cout<<e.what() << std::endl;
+        this->_reason = e.what();
     }
     catch(AForm::GradeTooLowException &e)
-    {   
-        std::cout<<e.what() << std::endl;
+    {
+        this->_reason = e.what();
     }
 }
 
@@ -110,12 +109,12 @@ void AForm::execute(Bureaucrat const & executor) const
                 {
                     if(executor.getGrade() > 150 || executor.getGrade()  > this->getGradeExec()) 
                         throw AForm::GradeTooLowException();
-                    else if(executor.getGrade() )
+                    else if(executor.getGrade() < 1 )
                         throw AForm::GradeTooHighException();
                     else 
                     {
                         this->executeForm(*this);
-                        std::cout<<executor.getName()<<" executed "<<this->getName()<<std::endl;
+                        std::cout<<executor.getName()<<" executed "<<this->getName()<<" ."<<std::endl;
                     }
                 }
             }
@@ -129,3 +128,8 @@ void AForm::execute(Bureaucrat const & executor) const
             }            
         }
 }   
+
+std::string AForm::getReason(void) const
+{
+    return this->_reason;
+}
