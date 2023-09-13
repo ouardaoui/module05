@@ -1,11 +1,11 @@
 #include "Form.hpp"
 
-Form::Form():_isSigned(false),_name("default"),_gradeSign(1),_gradeExec(1)
+Form::Form():_isSigned(false),_name("default"),_gradeSign(1),_gradeExec(1),_reason("didn t check  yet")
 {
     return;
 }
 
-Form::Form(std::string name,  const int gradeSign, const int gradeExec):_isSigned(false),_name(name),_gradeSign(gradeSign),_gradeExec(gradeExec)
+Form::Form(std::string name,  const int gradeSign, const int gradeExec):_isSigned(false),_name(name),_gradeSign(gradeSign),_gradeExec(gradeExec),_reason("didn t check yet")
 {
     try
     {
@@ -65,18 +65,17 @@ void Form::beSigned(Bureaucrat &b)
     else if(this->getGradeSign() >= b.getGrade() )
     {
         this->_isSigned = true;
-        std::cout<<b.getName()<<" sign "<<this->getName()<<" ."<<std::endl;
     }
     else 
-        std::cout<<b.getName()<<" couldn t sign "<<this->getName()<<" because "<<b.getName()<<"'s grad is too low ."<< std::endl;
+        throw Form::GradeTooLowException();
     }
     catch(Form::GradeTooHighException &e)
     {
-        std::cout<<e.what() << std::endl;
+        this->_reason = e.what();
     }
     catch(Form::GradeTooLowException &e)
     {   
-        std::cout<<e.what() << std::endl;
+        this->_reason = e.what();
     }
 }
 
@@ -99,4 +98,9 @@ std::ostream &operator<<(std::ostream &o, Form &b)
     else 
         std::cout<<"form "<< b.getName()<<" didn t signed .";
     return o;
+}
+        
+std::string Form::getReason(void)const 
+{   
+    return this->_reason;
 }

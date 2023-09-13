@@ -93,6 +93,14 @@ int  Bureaucrat::getGrade(void) const
 
 std::ostream &operator<<(std::ostream &o, Bureaucrat &b)
 {
-    o << b.getName() << " bureaucrat grade " << b.getGrade();
+    o << b.getName() << " bureaucrat grade " << b.getGrade()<<" .";
     return o;
+}
+
+void Bureaucrat::signForm(Form const &f) const
+{
+    if(f.isSigned())
+        std::cout<<this->getName()<<" sign "<<f.getName()<<" ."<<std::endl;
+    else 
+        std::cout<< this->getName()<<" couldn’t sign "<<f.getName()<<" because "<< f.getReason()<<" ."<<std::endl;
 }

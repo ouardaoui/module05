@@ -6,12 +6,14 @@
 #include<stdexcept>
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
 class  Form {
     private : 
         bool _isSigned;
         const std::string _name;
         const int _gradeSign;
         const int _gradeExec;
+        std::string _reason;
     public:    
         Form(void);
         Form(std::string name, int gradeSign , int gradeExec);
@@ -22,12 +24,13 @@ class  Form {
         int   getGradeExec(void) const;
         bool isSigned(void)const;
         void beSigned(Bureaucrat &b);
+        std::string getReason(void)const ;
         Form &operator=(Form const & Form);
         class GradeTooHighException : public std::exception
         {
             public : 
                 const char* what() const throw() {
-                    return "grade too high!!!";
+                    return "grade too high";
                 }
         };
         class GradeTooLowException : public std::exception
@@ -35,7 +38,7 @@ class  Form {
             public : 
                 const char* what() const throw()
                 {
-                    return "grade too low!!!";
+                    return "grade too low";
                 }
         };
 };
