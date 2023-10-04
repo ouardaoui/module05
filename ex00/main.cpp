@@ -3,7 +3,8 @@
 int main()
 {
     Bureaucrat b = Bureaucrat("morad", 110);
-    b.decrement();
-    std::cout<<b<<std::endl;
+    Bureaucrat a = Bureaucrat("ahmed", 90);
+    a = b;
+    std::cout<<a<<std::endl;
     return 0;
 }
